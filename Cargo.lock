@@ -56,7 +56,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "deno_plugin_test"
+name = "deno_plugin_example"
 version = "0.1.0"
 dependencies = [
  "deno_core 0.31.0 (registry+https://github.com/rust-lang/crates.io-index)",

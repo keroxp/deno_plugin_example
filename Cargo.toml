@@ -1,5 +1,5 @@
 [package]
-name = "deno_plugin_test"
+name = "deno_plugin_example"
 version = "0.1.0"
 authors = ["keroxp <kerokerokerop@gmail.com>"]
 edition = "2018"

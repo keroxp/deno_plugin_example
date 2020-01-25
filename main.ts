@@ -1,4 +1,4 @@
-const filenameBase = "deno_plugin_test";
+const filenameBase = "deno_plugin_example";
 let filenameSuffix = ".so";
 let filenamePrefix = "lib";
 
@@ -11,10 +11,7 @@ if (Deno.build.os === "mac") {
 }
 const filename = `./target/debug/${filenamePrefix}${filenameBase}${filenameSuffix}`;
 
-const pluginPath = new URL(
-  filename,
-  import.meta.url
-).pathname;
+const pluginPath = new URL(filename, import.meta.url).pathname;
 
 const plugin = Deno.openPlugin(pluginPath);
 const { testSync, testAsync } = plugin.ops;
@@ -40,5 +37,4 @@ async function runTestAsync(arg: string, zeroCopy?: string): Promise<string> {
   });
 }
 console.log(runTestSync("Deno", "ZeroCopy"));
-console.log(await runTestAsync("Deno", "ZeroCopy"));
 console.log(await runTestAsync("Deno", "ZeroCopy"));
