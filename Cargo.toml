@@ -1,0 +1,13 @@
+[package]
+name = "deno_plugin_test"
+version = "0.1.0"
+authors = ["keroxp <kerokerokerop@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+futures = "0.3"
+deno_core = "0.31.0"
