@@ -1,4 +1,4 @@
-# deno_plugin_test
+# deno_plugin_example
 
 
 This is an example repository of basic rust plugin for [Deno](https://deno.land)
