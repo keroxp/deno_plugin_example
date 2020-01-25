@@ -9,7 +9,7 @@ Use latest `rustc` and `deno`.
 
 `cargo build` will make files below:
 
-- `target/debug/libdeno_plugin_example.dylyb` (mac)
+- `target/debug/libdeno_plugin_example.dylib` (mac)
 - `target/debug/libdeno_plugin_example.so` (linux)
 - `target/debug/deno_plugin_example.dll` (win)
 
