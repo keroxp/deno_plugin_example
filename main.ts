@@ -14,7 +14,7 @@ const filename = `./target/debug/${filenamePrefix}${filenameBase}${filenameSuffi
 const pluginPath = new URL(filename, import.meta.url).pathname;
 
 const plugin = Deno.openPlugin(pluginPath);
-const { testSync, testAsync } = plugin.ops;
+const { testSync, testAsync, testJsonAsync } = plugin.ops;
 const decoder = new TextDecoder();
 const encoder = new TextEncoder();
 function runTestSync(arg: string, zeroCopy?: string): string {
@@ -36,5 +36,16 @@ async function runTestAsync(arg: string, zeroCopy?: string): Promise<string> {
     );
   });
 }
-console.log(runTestSync("Deno", "ZeroCopy"));
-console.log(await runTestAsync("Deno", "ZeroCopy"));
+
+async function runTestJsonAsync(arg: string) {
+  return new Promise((resolve) => {
+    testJsonAsync.setAsyncHandler(resp => {
+      resolve(decoder.decode(resp))
+    });
+    testJsonAsync.dispatch(encoder.encode(arg), null)
+  });
+}
+// console.log(runTestSync("Deno", "ZeroCopy"));
+runTestAsync("Deno1", "ZeroCopy").then(console.log);
+runTestAsync("Deno2", "ZeroCopy").then(console.log);
+console.log(await runTestJsonAsync("hello deno!"));

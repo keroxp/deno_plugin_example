@@ -11,6 +11,7 @@ use futures::future::FutureExt;
 fn init(context: &mut dyn PluginInitContext) {
   context.register_op("testSync", Box::new(op_test_sync));
   context.register_op("testAsync", Box::new(op_test_async));
+  context.register_op("testJsonAsync", Box::new(op_test_json_async))
 }
 init_fn!(init);
 
@@ -48,6 +49,14 @@ pub fn op_test_async(data: &[u8], zero_copy: Option<PinnedBuf>) -> CoreOp {
     let result_box: Buf = Box::new(*result);
     Ok(result_box)
   };
+  Op::Async(fut.boxed())
+}
 
+pub fn op_test_json_async(data: &[u8], _zero_copy: Option<PinnedBuf>) -> CoreOp {
+  let arg = std::str::from_utf8(&data[..]).unwrap().to_string();
+  let fut = async move {
+    let json = format!(r#"{{ "arg": "{}" }}"#, arg);
+    Ok(json.into_bytes().into_boxed_slice())
+  };
   Op::Async(fut.boxed())
 }
